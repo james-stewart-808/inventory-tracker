@@ -6,28 +6,71 @@ import time
 
 st.sidebar.markdown("Impact tracking results derived from the linking of: i) seaborne merchandise trade data for 2018 sourced from the UNCTAD Trade-and-Transport, ii) AIS data underpinning the 4th IMO GHG Study and iii) assumptions of Maritime Transport Costs (MTCs) resulting from the IMO Net-Zero Framework (NZF).")
 
-
-"""
-
-impact_res_cols_renames = {
-    "name":"Country",
+impact_res_ex_c = [
+    "source_iso_code", "source_country", "gdp_2018_wb", "vol_kg", "val_usd",
+    "vol_kg_recon", "val_usd_recon", "ene_tj_recon", "co2_t_recon",
+    "ets_23_usd_recon", "ets_30_usd_recon", "ets_23_pct_gdp", "ets_30_pct_gdp", 
+    "bau_usd_23_recon", "bau_usd_30_recon", "bau_usd_40_recon", "bau_usd_50_recon",
+    "bau_23_pct_gdp", "bau_30_pct_gdp", "bau_40_pct_gdp", "bau_50_pct_gdp", 
+    "s24_usd_23_recon_del", "s24_usd_30_recon_del", "s24_usd_40_recon_del", "s24_usd_50_recon_del",
+    "s24_del_23_pct_gdp", "s24_del_30_pct_gdp", "s24_del_40_pct_gdp", "s24_del_50_pct_gdp"
+]
+impact_res_ex_r = {
+    
+    # Country Stats
+    "source_country":"Country",
     "gdp_2018_wb":"GDP (2018)",
-    "exp_com_tot_usd":"Exporter-side Compliance Costs (US$)",
-    "exp_com_tot_usd_per_gdp_pct":"Exporter-side Compliance Costs (%GDP)",
-    "imp_com_tot_usd":"Importer-side Compliance Costs (US$)",
-    "imp_com_tot_usd_per_gdp_pct":"Importer-side Compliance Costs (%GDP)",
-    "tot_MTC_usd":"Total MTC Costs (US$)",
-    "tot_MTC_per_gdp_pct":"Total MTC Costs (%GDP)",
-    "tot_com_usd":"Compliance Costs (US$)",
-    "tot_com_tot_usd_per_gdp_pct":"Compliance Costs (%GDP)"}
+    "vol_kg":"Trade Portfolio Volume (kg)", 
+    "val_usd":"Trade Portfolio Value (US$)", 
 
-impact_res = pd.read_csv("https://raw.githubusercontent.com/james-stewart-808/inventory-tracker/main/datasets/TandT_MTC_info_coun_results.csv", dtype={"code_str3":"str"}).rename(columns=impact_res_cols_renames)
-impact_res_so = impact_res.sort_values(by="Compliance Costs (%GDP)", ascending=False).reset_index(drop=True)
-impact_res_cou = impact_res_so[(impact_res_so.code_str3 == st.session_state.iso_code)]
-impact_res_cou_rank = impact_res_cou.index.values[0]+1
+    # Trade Reconstruction Stats
+    "vol_kg_recon":"Reconstructed Trade Volume (kg)", 
+    "val_usd_recon":"Reconstructed Trade Value (US$)", 
+    "ene_tj_recon":"Reconstructed Trade Energy Demand (kg)", 
+    "co2_t_recon":"Reconstructed Trade CO2 Emissions (US$)", 
+
+    # ETS Compliance Costs
+    "ets_23_usd_recon":"ETS Compliance Costs in 2023 (US$)", 
+    "ets_30_usd_recon":"ETS Compliance Costs in 2030 (US$)", 
+    "ets_23_pct_gdp":"ETS Compliance Costs in 2023 (%GDP)", 
+    "ets_30_pct_gdp":"ETS Compliance Costs in 2030 (%GDP)", , 
+
+    # NZF Compliance Costs (BAU Only)
+    "bau_usd_23_recon":"BAU Costs in 2023 (US$)", 
+    "bau_usd_30_recon":"BAU Costs in 2030 (US$)", 
+    "bau_usd_40_recon":"BAU Costs in 2040 (US$)", 
+    "bau_usd_50_recon":"BAU Costs in 2050 (US$)",
+    "bau_23_pct_gdp":"BAU Costs in 2023 (%GDP)", 
+    "bau_30_pct_gdp":"BAU Costs in 2030 (%GDP)", 
+    "bau_40_pct_gdp":"BAU Costs in 2040 (%GDP)", 
+    "bau_50_pct_gdp":"BAU Costs in 2050 (%GDP)", 
+
+    # NZF Compliance Costs (S24 delta from BAU)
+    "s24_usd_23_recon_del":"NZF Incremental Cost in 2023 (US$)", 
+    "s24_usd_30_recon_del":"NZF Incremental Cost in 2030 (US$)", 
+    "s24_usd_40_recon_del":"NZF Incremental Cost in 2040 (US$)", 
+    "s24_usd_50_recon_del":"NZF Incremental Cost in 2050 (US$)",
+    "s24_del_23_pct_gdp":"NZF Incremental Cost in 2023 (%GDP)", 
+    "s24_del_30_pct_gdp":"NZF Incremental Cost in 2030 (%GDP)", 
+    "s24_del_40_pct_gdp":"NZF Incremental Cost in 2040 (%GDP)", 
+    "s24_del_50_pct_gdp":"NZF Incremental Cost in 2050 (%GDP)"
+}
+
+impact_res_ex = pd.read_csv(
+    "https://raw.githubusercontent.com/james-stewart-808/inventory-tracker/main/datasets/impact_analysis_ex.csv",
+    dtype={"source_iso_code":"str"}
+).rename(columns=impact_res_ex_r)
+
+impact_res_ex_so = impact_res_ex.sort_values(by="NZF Incremental Cost in 2050 (%GDP)", ascending=False).reset_index(drop=True)
+st.write(impact_res_ex_so.head())
+impact_res_ex_cou = impact_res_ex_so[(impact_res_ex_so.source_iso_code == st.session_state.iso_code)]
+impact_res_ex_cou_rank = impact_res_ex_cou.index.values[0]+1
 
 st.title("Key Impact Tracking Results for {0}".format(st.session_state.iso_country))
 st.header("General Results")
+
+
+"""
 
 tot_mtc_cost_usd = np.round(impact_res["Total MTC Costs (US$)"].sum() / 1000000000, 1)
 tot_com_cost_usd = np.round(impact_res["Compliance Costs (US$)"].sum() / 1000000000, 1)
