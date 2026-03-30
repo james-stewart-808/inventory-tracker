@@ -40,14 +40,14 @@ if I_X == "Exports":
     # Top Trade Flows
     if usd_t == "Value, $":
         st.header("Top Export Trade Flows by Value")
-        tr_profile = "baci_X_tr_usd"
+        tr_profile = "X_tr_usd"
         baci_tr = pd.read_csv("https://raw.githubusercontent.com/james-stewart-808/inventory-tracker/main/datasets/portfolios/{0}/{1}.csv".format(\
             st.session_state.iso_code, tr_profile), index_col=0)
         merch_trade_vis(baci_tr.iloc[:25], "clean_desc", "USD")
         #st.write(baci_tr.iloc[:5][["clean_desc", "USD"]])
     else:
         st.header("Top Export Trade Flows by Weight")
-        tr_profile = "baci_X_tr_t"
+        tr_profile = "X_tr_t"
         baci_tr = pd.read_csv("https://raw.githubusercontent.com/james-stewart-808/inventory-tracker/main/datasets/portfolios/{0}/{1}.csv".format(\
             st.session_state.iso_code, tr_profile), index_col=0)
         merch_trade_vis(baci_tr.iloc[:25], "clean_desc", "tonne")
@@ -58,14 +58,14 @@ if I_X == "Exports":
     # Top Commodity Flows
     if usd_t == "Value, $":
         st.header("Top Export Commodity Flows by Value")
-        co_profile = "baci_X_co_usd"
+        co_profile = "X_co_usd"
         baci_co = pd.read_csv("https://raw.githubusercontent.com/james-stewart-808/inventory-tracker/main/datasets/portfolios/{0}/{1}.csv".format(\
             st.session_state.iso_code, co_profile), index_col=0)
         merch_trade_vis(baci_co.iloc[:25], "description", "USD")
         #st.write(baci_co.iloc[:5][["HS2", "description", "USD"]])
     else:
         st.header("Top Export Commodity Flows by Weight")
-        co_profile = "baci_X_co_t"
+        co_profile = "X_co_t"
         baci_co = pd.read_csv("https://raw.githubusercontent.com/james-stewart-808/inventory-tracker/main/datasets/portfolios/{0}/{1}.csv".format(\
             st.session_state.iso_code, co_profile), index_col=0)
         merch_trade_vis(baci_co.iloc[:25], "description", "tonne")
@@ -76,14 +76,14 @@ if I_X == "Exports":
     # Top Partner Economies
     if usd_t == "Value, $":
         st.header("Top Export Partner Countries by Value")
-        pa_profile = "baci_X_pa_usd"
+        pa_profile = "X_pa_usd"
         baci_pa = pd.read_csv("https://raw.githubusercontent.com/james-stewart-808/inventory-tracker/main/datasets/portfolios/{0}/{1}.csv".format(\
             st.session_state.iso_code, pa_profile), index_col=0)
         merch_trade_vis(baci_pa.iloc[:25], "imp_name", "USD")
         #st.write(baci_pa.iloc[:5][["imp_name", "USD"]])
     else:
         st.header("Top Export Partner Countries by Weight")
-        pa_profile = "baci_X_pa_t"
+        pa_profile = "X_pa_t"
         baci_pa = pd.read_csv("https://raw.githubusercontent.com/james-stewart-808/inventory-tracker/main/datasets/portfolios/{0}/{1}.csv".format(\
             st.session_state.iso_code, pa_profile), index_col=0)
         merch_trade_vis(baci_pa.iloc[:25], "imp_name", "tonne")
@@ -97,14 +97,14 @@ else:
     # Top Trade Flows
     if usd_t == "Value, $":
         st.header("Top Import Trade Flows by Value")
-        tr_profile = "baci_I_tr_usd"
+        tr_profile = "I_tr_usd"
         baci_tr = pd.read_csv("https://raw.githubusercontent.com/james-stewart-808/inventory-tracker/main/datasets/portfolios/{0}/{1}.csv".format(\
             st.session_state.iso_code, tr_profile), index_col=0)
         merch_trade_vis(baci_tr.iloc[:25], "clean_desc", "USD")
         #st.write(baci_tr.iloc[:5][["clean_desc", "USD"]])
     else:
         st.header("Top Import Trade Flows by Weight")
-        tr_profile = "baci_I_tr_t"
+        tr_profile = "I_tr_t"
         baci_tr = pd.read_csv("https://raw.githubusercontent.com/james-stewart-808/inventory-tracker/main/datasets/portfolios/{0}/{1}.csv".format(\
             st.session_state.iso_code, tr_profile), index_col=0)
         merch_trade_vis(baci_tr.iloc[:25], "clean_desc", "tonne")
@@ -115,14 +115,14 @@ else:
     # Top Commodity Flows
     if usd_t == "Value, $":
         st.header("Top Import Commodity Flows by Value")
-        co_profile = "baci_I_co_usd"
+        co_profile = "I_co_usd"
         baci_co = pd.read_csv("https://raw.githubusercontent.com/james-stewart-808/inventory-tracker/main/datasets/portfolios/{0}/{1}.csv".format(\
             st.session_state.iso_code, co_profile), index_col=0)
         merch_trade_vis(baci_co.iloc[:25], "description", "USD")
         #st.write(baci_co.iloc[:5][["HS2", "description", "USD"]])
     else:
         st.header("Top Import Commodity Flows by Weight")
-        co_profile = "baci_I_co_t"
+        co_profile = "I_co_t"
         baci_co = pd.read_csv("https://raw.githubusercontent.com/james-stewart-808/inventory-tracker/main/datasets/portfolios/{0}/{1}.csv".format(\
             st.session_state.iso_code, co_profile), index_col=0)
         merch_trade_vis(baci_co.iloc[:25], "description", "tonne")
@@ -133,14 +133,14 @@ else:
     # Top Partner Economies
     if usd_t == "Value, $":
         st.header("Top Import Partner Countries by Value")
-        pa_profile = "baci_I_pa_usd"
+        pa_profile = "I_pa_usd"
         baci_pa = pd.read_csv("https://raw.githubusercontent.com/james-stewart-808/inventory-tracker/main/datasets/portfolios/{0}/{1}.csv".format(\
             st.session_state.iso_code, pa_profile), index_col=0)
         merch_trade_vis(baci_pa.iloc[:25], "exp_name", "USD")
         #st.write(baci_pa.iloc[:5][["exp_name", "USD"]])
     else:
         st.header("Top Import Partner Countries by Weight")
-        pa_profile = "baci_I_pa_t"
+        pa_profile = "I_pa_t"
         baci_pa = pd.read_csv("https://raw.githubusercontent.com/james-stewart-808/inventory-tracker/main/datasets/portfolios/{0}/{1}.csv".format(\
             st.session_state.iso_code, pa_profile), index_col=0)
         merch_trade_vis(baci_pa.iloc[:25], "exp_name", "tonne")
