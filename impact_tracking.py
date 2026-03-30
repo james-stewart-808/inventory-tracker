@@ -33,7 +33,7 @@ impact_res_ex_r = {
     "ets_23_usd_recon":"ETS Compliance Costs in 2023 (US$)", 
     "ets_30_usd_recon":"ETS Compliance Costs in 2030 (US$)", 
     "ets_23_pct_gdp":"ETS Compliance Costs in 2023 (%GDP)", 
-    "ets_30_pct_gdp":"ETS Compliance Costs in 2030 (%GDP)", , 
+    "ets_30_pct_gdp":"ETS Compliance Costs in 2030 (%GDP)",
 
     # NZF Compliance Costs (BAU Only)
     "bau_usd_23_recon":"BAU Costs in 2023 (US$)", 
