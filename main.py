@@ -17,4 +17,5 @@ st.header("Welcome to the Homepage of the International Shipping Dashboard 🏡"
 #        return None
 #country_iso_codes = load_original_data()
 
-#uploaded_file = st.file_uploader("datasets/country_iso_codes.csv")
+uploaded_file = st.file_uploader("datasets/country_iso_codes.csv")
+st.write(pd.read_csv(uploaded_file))
