@@ -16,7 +16,7 @@ def load_original_data():
         st.error("Failed to load data from GitHub.")
         return None
 country_iso_codes = load_original_data()
-st.write(type(country_iso_codes))
+st.write(dir(country_iso_codes))
 
 # Function to load the CSV file
 #@st.cache_data
